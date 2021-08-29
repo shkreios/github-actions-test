@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: '14'
 
-      - run: echo NODE_ENV
+      - run: echo $NODE_ENV
         env:
           NODE_ENV: development
 
