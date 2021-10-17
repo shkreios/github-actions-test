@@ -7,9 +7,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: shkreios/runtime-env-action@v1.0.1
+      - uses: shkreios/runtime-env-action@v1.0.2
         with:
           version: "1.1.0"
+      - run: runtime-env --help
   # test:
   #   environment: ${{ (endsWith(github.ref,'refs/heads/main') || contains(github.ref, 'tags'))  && 'production' || 'staging' }}
   #   runs-on: ubuntu-latest
