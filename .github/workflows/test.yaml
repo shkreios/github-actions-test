@@ -7,10 +7,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: shkreios/runtime-env-action@v1.0.2
+      - run: echo nice=test > test.env
+      - uses: shkreios/runtime-env-action@v1.1.2
         with:
-          version: "1.1.0"
-      - run: runtime-env --help
+          version: v1.2.1
+          envFile: test.env
+          output: env.js
+          noEnvs: "true"
+      - run: echo $(ls)
+      - run: echo $(cat env.js)
   # test:
   #   environment: ${{ (endsWith(github.ref,'refs/heads/main') || contains(github.ref, 'tags'))  && 'production' || 'staging' }}
   #   runs-on: ubuntu-latest
