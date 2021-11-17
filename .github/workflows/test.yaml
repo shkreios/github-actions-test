@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo nice=test > test.env
-      - uses: shkreios/runtime-env-action@v1.1.2
+      - uses: shkreios/runtime-env-action@v1
         with:
           version: v1.2.1
           envFile: test.env
