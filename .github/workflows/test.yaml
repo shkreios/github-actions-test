@@ -10,7 +10,18 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.ref }}
+      - uses: shkreios/secret-environment-emulator@v1
+        id: secrets
+        with:
+          secrets: ${{ toJson(secrets) }}
+          environment: staging
+
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v8
+        with:
+          urls: ${{ steps.secrets.outputs.URL }}
+          uploadArtifacts: false
+          temporaryPublicStorage: true
       # - uses: shkreios/secret-environment-emulator@v1
       #   id: secrets
       #   with:
