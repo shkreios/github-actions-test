@@ -15,7 +15,7 @@ jobs:
         id: secrets
         with:
           secrets: ${{ toJson(secrets) }}
-          environment: staging
+          environment: production
 
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v8
