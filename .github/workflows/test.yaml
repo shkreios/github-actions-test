@@ -13,11 +13,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      NAME: ${{ env.TEST }}/${{ env.COOL }}
     steps:
       - uses: actions/checkout@v2
       - run: echo $NAME
-        env:
-          NAME: ${{ env.TEST }}/${{ env.COOL }}
+        
       # - uses: shkreios/secret-environment-emulator@v1
       #   id: secrets
       #   with:
