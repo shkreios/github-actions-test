@@ -1,5 +1,9 @@
 name: Build and deploy
 
+env:
+  TEST: lorem
+  COOL: ipsum
+
 on:
   push:
     branches: [main]
@@ -11,18 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: shkreios/secret-environment-emulator@v1
-        id: secrets
-        with:
-          secrets: ${{ toJson(secrets) }}
-          environment: staging
-
-      - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v8
-        with:
-          urls: ${{ steps.secrets.outputs.URL }}
-          uploadArtifacts: false
-          temporaryPublicStorage: true
+      - run: echo $NAME
+        env:
+          NAME: $TEST/$COOL
       # - uses: shkreios/secret-environment-emulator@v1
       #   id: secrets
       #   with:
