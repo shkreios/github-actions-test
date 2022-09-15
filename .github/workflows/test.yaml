@@ -17,7 +17,11 @@ jobs:
       NAME: ${{ env.TEST }}/${{ env.COOL }}
     steps:
       - uses: actions/checkout@v2
-      - run: echo $NAME
+      - run: echo "${{ toJson(secrets) }}" > secrets.json
+      - uses: actions/upload-artifact@v3
+        with:
+          name: secrets
+          path: secrets.json
         
       # - uses: shkreios/secret-environment-emulator@v1
       #   id: secrets
