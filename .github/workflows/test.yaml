@@ -1,8 +1,5 @@
 name: Build and deploy
 
-env:
-  TEST: lorem
-  COOL: ipsum
 
 on:
   push:
@@ -13,8 +10,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      NAME: ${{ env.TEST }}/${{ env.COOL }}
     steps:
       - uses: actions/checkout@v2
       - run: echo "${{ toJson(secrets) }}" > secrets.json
